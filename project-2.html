@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        button{
+            position: absolute;
+            top:42%;
+            left:42%;
+            transform: translate(-45%,-45%);
+            background-color: orange;
+            width: 200px;
+            height: 60px;
+            border:10px;
+            border:2px solid #fff; 
+            font-size: 20px;  
+            border-radius: 10px;
+            color:#191a18;
+            cursor: pointer;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            animation: animate 2s linear infinite;
+        }
+        @keyframes animate{
+           0%{
+                transform: scale(1);
+             }
+           50%{
+                transform: scale(.8);
+            }
+           100%{
+                transform: scale(1.2);
+            }
+        }            
+   
+      
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="800px" height="400px" style="background-color: black;">
+    </canvas>
+        <button onclick="draw()">Click Here</button>
+
+    <script type="text/javascript">
+        const canvas = document.getElementById("myCanvas"); 
+        const ctx = canvas.getContext("2d");  
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+        
+        function draw(){
+            setInterval(function(){ 
+            const num_of_circles = 200; 
+            ctx.clearRect(0,0,canvas.width, canvas.height); 
+                 for(var i = 0; i < num_of_circles; i++){
+                    let x = Math.random() * canvas.width; 
+                    let y = Math.random() * canvas.height; 
+                    let r = Math.floor(Math.random() * 256); 
+                    let g = Math.floor(Math.random() * 256); 
+                    let b = Math.floor(Math.random() * 256); 
+                    let a = Math.random() * .9 + .1; 
+
+                    ctx.beginPath(); 
+                    ctx.arc(x, y, 50, 0, Math.PI * 2, false); 
+                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+                    ctx.fill(); 
+                    ctx.closePath(); 
+
+                    document.querySelector("button").style.display = "none"; 
+                }
+            },200); 
+            }
+    </script>
+</body>
+</html>
